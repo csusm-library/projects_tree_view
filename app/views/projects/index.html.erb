@@ -17,17 +17,17 @@
 <%= link_to(l(:expand_all), "#", :onclick => 'expandAll()')%><span>&nbsp;/&nbsp;</span><%= link_to l(:collapse_all), "#", :onclick => 'collapseAll()' %>
 </p>
 
-<table class="list">
+<table class="list projects-tree">
   <% show_project_progress = Setting.plugin_projects_tree_view['show_project_progress'] %>
   <thead>
     <tr>
-      <th><%= l(:label_project)%></th>
-      <th><%= l(:field_description)%></th>
-      <th><%= l(:field_go_to)%></th>
+      <th class="projects"><%= l(:label_project)%></th>
+      <th class="description"><div class="description-wrapper"><%= truncate(l(:field_description), :length => 100) %></div></th>
+      <th class="modules"><%= l(:field_go_to)%></th>
       <% if show_project_progress %>
-        <th><%= l(:field_versions)%></th>
+        <th class="versions"><%= l(:field_versions)%></th>
       <% end %>
-      <th><%= l(:field_created_on)%></th>
+      <th class="created"><%= l(:field_created_on)%></th>
     </tr>
   </thead>
   <tbody>
@@ -49,7 +49,7 @@
         <% if show_project_progress %>
           <td><%= render_project_progress(project) %></td>
         <% end %>
-        <td align="center"><%= format_date(project.created_on) %></td>
+        <td align="center" class="created"><%= format_date(project.created_on) %></td>
       </tr>
       <% ancestors << project_id if has_children %>
       <% plevel = level %>
