@@ -44,7 +44,7 @@
           <% end %>
           <%= project.active? ? link_to_project(project, {:action => 'show'}) : h(project.name) %>
           <span class="empty <%= "my-project" if User.current.member_of?(project) %>">&nbsp;</span></td>
-        <td><%= textilizable project.short_description.gsub(/\!.+\!/,""), :project => project %></td>
+        <td class="description"><%= textilizable project.short_description.gsub(/\!.+\!/,""), :project => project %></td>
         <td><%= favorite_project_modules_links(project) %></td>
         <% if show_project_progress %>
           <td><%= render_project_progress(project) %></td>
