@@ -11,24 +11,12 @@
 
 <h2><%= l(:label_project_plural)%></h2>
 
-<table class="list">
-  <thead>
-    <tr>
-      <th><%= l(:label_project)%></th>
-      <th><%= l(:field_description)%></th>
-      <th><%= l(:field_go_to)%></th>
-      <th><%= l(:field_versions)%></th>
-      <th><%= l(:field_created_on)%></th>
-    </tr>
-  </thead>
+<table class="list table">
   <tbody>
     <% project_tree(@projects) do |project, level| %>
       <tr class="<%= cycle("odd", "even") %> <%= project.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
         <td class="name"><span><%= project.active? ? link_to_project(project, {:action => 'show'}) : h(project.name) %></span><b class="empty <%= "my-project" if User.current.member_of?(project) %>">&nbsp;</b></td>
-        <td><%= textilizable project.short_description.gsub(/\!.+\!/,""), :project => project %></td>
         <td><%= favorite_project_modules_links(project) %></td>
-        <td><%= render_project_progress(project) %></td>
-        <td align="center"><%= format_date(project.created_on) %></td>
       </tr>
     <% end %>
   </tbody>
